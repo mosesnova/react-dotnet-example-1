@@ -22,7 +22,7 @@ namespace react_dotnet_example
         {
 
             services.AddControllersWithViews();
-
+            services.AddCors();
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -49,7 +49,10 @@ namespace react_dotnet_example
             app.UseSpaStaticFiles();
 
             app.UseRouting();
-
+            app.UseCors(options =>
+     options.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod());
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
